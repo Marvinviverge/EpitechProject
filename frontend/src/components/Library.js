@@ -4,18 +4,18 @@ import { jwtDecode } from "jwt-decode";
 import Navbar from './Navbar';
 
 const Library = () => {
-    const api = useAxios();
-    const [books, setBooks] = useState([]);
-    const [borrowResponse, setBorrowResponse] = useState('');
-    const [borrowedBookId, setBorrowedBookId] = useState(null);
-    const [sortOption, setSortOption] = useState('title'); // Défaut: trier par titre
+    const api = useAxios()
+    const [books, setBooks] = useState([])
+    const [borrowResponse, setBorrowResponse] = useState('')
+    const [borrowedBookId, setBorrowedBookId] = useState(null)
+    const [sortOption, setSortOption] = useState('title')
 
-    const token = localStorage.getItem("authTokens");
-    let username = '';
+    const token = localStorage.getItem("authTokens")
+    let username = ''
 
     if (token) {
-        const decode = jwtDecode(token);
-        username = decode.username;
+        const decode = jwtDecode(token)
+        username = decode.username
     }
 
     const fetchGetData = useCallback(async () => {
@@ -37,30 +37,30 @@ const Library = () => {
                 sortedBooks.sort((a, b) => a.title.localeCompare(b.title))
             }
 
-            setBooks(sortedBooks);
+            setBooks(sortedBooks)
         } catch (error) {
-            console.log(error);
-            setBooks("Une erreur s'est produite !");
+            console.log(error)
+            setBooks("Une erreur s'est produite !")
         }
-    }, [api, sortOption]);
+    }, [api, sortOption])
 
     const handleBorrow = async (bookId) => {
         try {
             const response = await api.put(`/library/${bookId}/`, { borrower: username });
-            setBorrowedBookId(bookId);
-            setBorrowResponse(response);
-            console.log(borrowResponse);
+            setBorrowedBookId(bookId)
+            setBorrowResponse(response)
+            console.log(borrowResponse)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     };
 
     useEffect(() => {
-        fetchGetData();
-    }, [fetchGetData, borrowedBookId, sortOption]);
+        fetchGetData()
+    }, [fetchGetData, borrowedBookId, sortOption])
 
     const handleSortChange = (event) => {
-        setSortOption(event.target.value);
+        setSortOption(event.target.value)
     };
 
     return (
