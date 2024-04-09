@@ -9,4 +9,7 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='auth_register'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('library/', views.library, name='library'),
+    path('library/<int:book_id>/', views.borrow_book, name='borrow_book'),
+    path('create_book/', views.create_book, name='create_book'),
+
 ]

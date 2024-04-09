@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 const swal = require('sweetalert2')
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export default AuthContext
 
@@ -12,19 +12,19 @@ export const AuthProvider = ({ children }) => {
         localStorage.getItem("authTokens")
             ? JSON.parse(localStorage.getItem("authTokens"))
             : null
-    );
+    )
 
 
     const [user, setUser] = useState(() =>
         localStorage.getItem("authTokens")
             ? jwtDecode(localStorage.getItem("authTokens"))
             : null
-    );
+    )
 
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const loginUser = async (email, password) => {
         const response = await fetch("http://127.0.0.1:8000/api/token/", {
@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
             })
         })
         const data = await response.json()
-        console.log(data);
 
         if (response.status === 200) {
             setAuthTokens(data)

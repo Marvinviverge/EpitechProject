@@ -1,8 +1,6 @@
 import { useState, useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Navigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
-
-
 
 export default function Register() {
 
@@ -11,8 +9,15 @@ export default function Register() {
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
 
+
     const { registerUser } = useContext(AuthContext)
 
+    const { user } = useContext(AuthContext)
+
+    if (user) {
+        return <Navigate to="/dashboard" />
+
+    }
     const handleSubmit = async e => {
         e.preventDefault()
         registerUser(email, username, password, password2)

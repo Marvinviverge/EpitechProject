@@ -6,7 +6,9 @@ const Navbar = () => {
 
     return (
         <header className="bg-white shadow flex justify-between p-10">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Mon Tableau de bord</h1>
+            <NavLink to='/dashboard'>
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900">Mon Tableau de bord</h1>
+            </NavLink>
             <NavLink onClick={logoutUser}>
                 Se déconnecter
             </NavLink>

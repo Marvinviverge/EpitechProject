@@ -1,4 +1,4 @@
-from api.models import User
+from api.models import User, Book
 
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -45,3 +45,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['id', 'title', 'author', 'condition', 'borrower']
+
+    def create(self, validated_data):
+        book = Book.objects.create(
+            title=validated_data['title'],
+            author=validated_data['author'],
+            condition=validated_data['condition'],
+            )
+        return book

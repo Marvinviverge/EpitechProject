@@ -1,11 +1,17 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Navigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
-
 
 export default function Login() {
 
     const { loginUser } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+
+    if (user) {
+        return <Navigate to="/dashboard" />
+
+    }
+
     const handleSubmit = e => {
         e.preventDefault()
         const email = e.target.email.value
