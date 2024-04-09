@@ -6,7 +6,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['username', 'email']
 
 class BookAdmin(admin.ModelAdmin):
-    list_display= ('title', 'author', 'condition', 'borrower')
+    list_display= ('title', 'author', 'condition', 'genre', 'borrower')
     search_fields= ['title']
 
 admin.site.register(User, UserAdmin)

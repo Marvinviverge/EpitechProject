@@ -8,6 +8,7 @@ const File = () => {
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [condition, setCondition] = useState("")
+    const [genre, setGenre] = useState("")
     const navigate = useNavigate()
 
     const handleSubmit = async e => {
@@ -16,12 +17,14 @@ const File = () => {
             const response = await api.post("/create_book/", {
                 title: title,
                 author: author,
-                condition: condition
+                condition: condition,
+                genre: genre
             })
             console.log("Book created:", response.data)
             setTitle("")
             setAuthor("")
             setCondition("")
+            setGenre("")
             navigate('/dashboard')
         } catch (error) {
             console.error("Error creating book:", error)
@@ -64,6 +67,29 @@ const File = () => {
                                     onChange={e => setAuthor(e.target.value)}
                                     placeholder="L'auteur du livre"
                                 />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mt-2">
+                                <select
+                                    id="genre"
+                                    name="genre"
+                                    required
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    onChange={e => setGenre(e.target.value)}
+                                    defaultValue=""
+                                >
+                                    <option value="" disabled hidden>
+                                        Sélectionnez le genre du livre
+                                    </option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Dystopie">Dystopie</option>
+                                    <option value="Littérature classique">Littérature classique</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Jeunesse">Jeunesse</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
                             </div>
                         </div>
                         <div>

@@ -49,12 +49,13 @@ class RegisterSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['id', 'title', 'author', 'condition', 'borrower']
+        fields = ['id', 'title', 'author', 'condition', 'genre', 'borrower']
 
     def create(self, validated_data):
         book = Book.objects.create(
             title=validated_data['title'],
             author=validated_data['author'],
             condition=validated_data['condition'],
+            genre=validated_data['genre'],
             )
         return book

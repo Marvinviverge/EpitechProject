@@ -15,6 +15,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     condition = models.CharField(max_length=200)
+    genre = models.CharField(max_length=200, default="")
     borrower = models.CharField(max_length=200, blank=True, default="")
 
     def __str__(self):
